@@ -17,3 +17,20 @@ dependencies {
     testImplementation("io.kotest:kotest-assertions-core:$kotestVersion") // for kotest core assertions
     testImplementation("io.kotest:kotest-assertions-core-jvm:$kotestVersion") // for kotest core jvm assertions
 }
+
+tasks.withType<Test> {
+    useJUnitPlatform() // Use JUnit 5 engine
+    testLogging.showStandardStreams = true
+    testLogging {
+        showCauses = true
+        showStackTraces = true
+        showStandardStreams = true
+        events(*org.gradle.api.tasks.testing.logging.TestLogEvent.values())
+        exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+    }
+}
+
+detekt {
+    failFast = true
+    buildUponDefaultConfig = true // preconfigure defaults
+}
