@@ -1,4 +1,4 @@
-package usecase.shared.model
+package usecase.shared
 
 /**
  * Class that represents the error generated from the

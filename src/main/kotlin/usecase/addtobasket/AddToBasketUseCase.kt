@@ -1,9 +1,9 @@
 package usecase.addtobasket
 
-import domain.model.Amount
 import domain.model.ProductInBasket
 import domain.service.TaxAmountCalculator
 import usecase.shared.ProductInBasketRepository
+import usecase.shared.ProductNotFound
 import usecase.shared.ProductRepository
 import usecase.shared.UseCaseInput
 import usecase.shared.UseCaseOutput
@@ -21,16 +21,9 @@ class AddToBasketUseCase(
     override fun execute(request: AddToBasketRequest) {
         val (productId, quantity) = request
         val product = productRepository.findById(productId) ?: throw ProductNotFound()
-        var taxesAmount = Amount(0.0)
-        var priceIncludingTaxes = Amount(0.0)
-        for (i in 1..quantity) {
-            val taxAmount = taxCalculator.calculateTaxAmount(product)
-            taxesAmount += taxAmount
-            val priceWithTaxes = product.shelfPrice + taxAmount
-            priceIncludingTaxes += priceWithTaxes
-        }
+        val taxAmount = taxCalculator.calculateTaxAmount(product)
         val productInBasket = productInBasketRepository.add(
-            ProductInBasket(productId, quantity, taxesAmount, priceIncludingTaxes)
+            ProductInBasket(productId, quantity, taxAmount * quantity)
         )
         output.handleResponse(AddToBasketResponse(productInBasket))
     }

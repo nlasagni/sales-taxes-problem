@@ -1,4 +1,4 @@
-package usecase.addtobasket
+package usecase.shared
 
 /**
  * @author Nicola Lasagni on 11/08/2021.

@@ -11,6 +11,7 @@ import domain.service.TaxRateProviderImpl
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.assertThrows
+import usecase.shared.ProductNotFound
 
 /**
  * @author Nicola Lasagni on 11/08/2021.
@@ -25,7 +26,7 @@ class AddToBasketUseCaseTest : FreeSpec({
         taxCalculator,
         productRepository,
         productInBasketRepository,
-        MockedUseCaseOutput()
+        MockedAddToBasketOutput()
     )
     val fakeId = ProductId("1234")
 

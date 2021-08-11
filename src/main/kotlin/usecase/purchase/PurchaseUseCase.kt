@@ -1,9 +1,11 @@
 package usecase.purchase
 
 import domain.model.Amount
-import domain.model.ProductInBasket
+import domain.model.ProductInReceipt
 import domain.model.Receipt
-import domain.service.TaxAmountCalculatorImpl
+import usecase.shared.ProductInBasketRepository
+import usecase.shared.ProductNotFound
+import usecase.shared.ProductRepository
 import usecase.shared.UseCaseInput
 import usecase.shared.UseCaseOutput
 
@@ -13,23 +15,36 @@ import usecase.shared.UseCaseOutput
  * @author Nicola Lasagni on 11/08/2021.
  */
 class PurchaseUseCase(
-    private val taxCalculator: TaxAmountCalculatorImpl,
+    private val productRepository: ProductRepository,
+    private val productInBasketRepository: ProductInBasketRepository,
     private val output: UseCaseOutput<PurchaseResponse>
 ) : UseCaseInput<PurchaseRequest> {
 
     override fun execute(request: PurchaseRequest) {
-        val products = request.products
+        val productsInBasket = productInBasketRepository.findAll()
+        if (productsInBasket.isEmpty()) {
+            throw NoProductInBasket()
+        }
         var totalSalesTaxes = Amount(0.0)
         var totalPrice = Amount(0.0)
-        val purchasedProducts = mutableListOf<ProductInBasket>()
-        for (product in products) {
-            val taxAmount = taxCalculator.calculateTaxAmount(product)
-            totalSalesTaxes += taxAmount
-            val priceWithTaxes = product.shelfPrice + taxAmount
-            totalPrice += priceWithTaxes
-            purchasedProducts.add(ProductInBasket(product.id, 1, priceWithTaxes, Amount(0.0)))
+        val productsInReceipt = mutableListOf<ProductInReceipt>()
+        for (productInBasket in productsInBasket) {
+            val product = productRepository.findById(productInBasket.productId) ?: throw ProductNotFound()
+            val taxesAmount = productInBasket.taxesAmount
+            val totalShelfPrice = product.shelfPrice * productInBasket.quantity
+            val totalShelfPriceIncludingTaxes = totalShelfPrice + productInBasket.taxesAmount
+            totalSalesTaxes += taxesAmount
+            totalPrice += totalShelfPriceIncludingTaxes
+            productsInReceipt.add(
+                ProductInReceipt(
+                    product.name,
+                    productInBasket.quantity,
+                    taxesAmount,
+                    totalShelfPriceIncludingTaxes
+                )
+            )
         }
-        val receipt = Receipt(purchasedProducts, totalSalesTaxes, totalPrice)
+        val receipt = Receipt(productsInReceipt, totalSalesTaxes, totalPrice)
         val response = PurchaseResponse(receipt)
         output.handleResponse(response)
     }

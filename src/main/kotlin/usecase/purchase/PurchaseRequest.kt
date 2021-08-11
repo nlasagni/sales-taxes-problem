@@ -7,6 +7,4 @@ import domain.model.Product
  *
  * @author Nicola Lasagni on 11/08/2021.
  */
-data class PurchaseRequest(
-    val products: Collection<Product>
-)
+class PurchaseRequest
