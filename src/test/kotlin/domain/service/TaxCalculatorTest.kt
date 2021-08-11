@@ -1,5 +1,6 @@
 package domain.service
 
+import domain.model.Amount
 import domain.model.Product
 import domain.model.ProductCategory
 import domain.model.ProductId
@@ -16,12 +17,12 @@ class TaxCalculatorTest : FreeSpec({
         ProductId("123"),
         "Test Item",
         ProductCategory.MISCELLANEOUS,
-        BigDecimal(1),
+        Amount.of(1),
         true
     )
     val taxRateProvider = TaxRateProviderImpl()
     val taxCalculator = TaxAmountCalculatorImpl(taxRateProvider)
-    val expectedTaxAmount = BigDecimal(0.15)
+    val expectedTaxAmount = Amount(0.15)
 
     "A TaxCalculator should compute the tax amount for a given item" - {
         taxCalculator.calculateTaxAmount(product).shouldBe(expectedTaxAmount)

@@ -1,5 +1,6 @@
 package usecase.purchase
 
+import domain.model.Amount
 import domain.model.Product
 import domain.model.ProductCategory
 import domain.model.ProductId
@@ -10,7 +11,6 @@ import io.kotest.matchers.shouldBe
 import usecase.shared.UseCaseOutput
 import usecase.shared.model.UseCaseError
 import usecase.shared.model.UseCaseResponse
-import java.math.BigDecimal
 
 /**
  * Test of the [PurchaseUseCase].
@@ -22,12 +22,12 @@ class PurchaseUseCaseTest : FreeSpec({
     val taxRateProvider = TaxRateProviderImpl()
     val taxCalculator = TaxAmountCalculatorImpl(taxRateProvider)
     val fakeProductId = ProductId("1234")
-    val books = Product(fakeProductId, "book", ProductCategory.BOOK, BigDecimal(2), false)
-    val musicCD = Product(fakeProductId, "music CD", ProductCategory.MISCELLANEOUS, BigDecimal(1), false)
-    val chocolateBar = Product(fakeProductId, "chocolate bar", ProductCategory.FOOD, BigDecimal(1), false)
+    val books = Product(fakeProductId, "book", ProductCategory.BOOK, Amount.of(2), false)
+    val musicCD = Product(fakeProductId, "music CD", ProductCategory.MISCELLANEOUS, Amount.of(1), false)
+    val chocolateBar = Product(fakeProductId, "chocolate bar", ProductCategory.FOOD, Amount.of(1), false)
     val purchaseItems = listOf(books, musicCD, chocolateBar)
-    val totalSalesTaxes = BigDecimal(0.1)
-    val totalPrice = BigDecimal(4.1)
+    val totalSalesTaxes = Amount(0.1)
+    val totalPrice = Amount(4.1)
 
     "The purchase use case should generate a response which contains correct items, taxes and total price" - {
         val purchaseUseCase = PurchaseUseCase(

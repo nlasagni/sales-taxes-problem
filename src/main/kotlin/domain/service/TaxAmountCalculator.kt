@@ -1,7 +1,7 @@
 package domain.service
 
+import domain.model.Amount
 import domain.model.Product
-import java.math.BigDecimal
 
 /**
  * Calculates tax amount and taxed prices of [Product]s.
@@ -14,5 +14,5 @@ interface TaxAmountCalculator {
      * Calculates the amount of taxes for the given [product].
      * @return The taxes amount.
      */
-    fun calculateTaxAmount(product: Product): BigDecimal
+    fun calculateTaxAmount(product: Product): Amount
 }

@@ -1,12 +1,12 @@
 package usecase.purchase
 
+import domain.model.Amount
 import domain.model.PurchasedProduct
 import domain.model.Receipt
 import domain.service.TaxAmountCalculatorImpl
 import usecase.shared.UseCaseInput
 import usecase.shared.UseCaseOutput
 import usecase.shared.model.UseCaseResponse
-import java.math.BigDecimal
 
 /**
  * Makes a purchase of items specified by the [PurchaseRequest].
@@ -20,8 +20,8 @@ class PurchaseUseCase(
 
     override fun execute(request: PurchaseRequest) {
         val products = request.products
-        var totalSalesTaxes = BigDecimal.ZERO
-        var totalPrice = BigDecimal.ZERO
+        var totalSalesTaxes = Amount(0.0)
+        var totalPrice = Amount(0.0)
         val purchasedProducts = mutableListOf<PurchasedProduct>()
         for (product in products) {
             val taxAmount = taxCalculator.calculateTaxAmount(product)

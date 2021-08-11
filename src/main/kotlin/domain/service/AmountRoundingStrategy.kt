@@ -1,6 +1,6 @@
 package domain.service
 
-import java.math.BigDecimal
+import domain.model.Amount
 
 /**
  * Strategy for rounding taxes.
@@ -13,5 +13,5 @@ interface AmountRoundingStrategy {
      * Round the given [amount] by following the implemented strategy.
      * @return The rounded value.
      */
-    fun round(amount: BigDecimal): BigDecimal
+    fun round(amount: Amount): Amount
 }

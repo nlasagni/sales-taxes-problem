@@ -1,7 +1,5 @@
 package domain.model
 
-import java.math.BigDecimal
-
 /**
  * The receipt related to the [PurchasedProduct]s chosen.
  *
@@ -11,6 +9,6 @@ import java.math.BigDecimal
  */
 class Receipt(
     val purchasedProducts: Collection<PurchasedProduct>,
-    val totalSalesTaxes: BigDecimal,
-    val totalPrice: BigDecimal
+    val totalSalesTaxes: Amount,
+    val totalPrice: Amount
 )

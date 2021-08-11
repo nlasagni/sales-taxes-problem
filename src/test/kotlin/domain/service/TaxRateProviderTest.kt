@@ -1,11 +1,11 @@
 package domain.service
 
+import domain.model.Amount
 import domain.model.Product
 import domain.model.ProductCategory
 import domain.model.ProductId
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
-import java.math.BigDecimal
 
 /**
  * @author Nicola Lasagni on 11/08/2021.
@@ -16,7 +16,7 @@ class TaxRateProviderTest : FreeSpec({
     val taxRateProvider = TaxRateProviderImpl()
 
     "A TaxRateProvider should provide no tax rate for exempt items" - {
-        val exemptItem = Product(fakeProductId, "Exempt item", ProductCategory.BOOK, BigDecimal(1), false)
+        val exemptItem = Product(fakeProductId, "Exempt item", ProductCategory.BOOK, Amount.of(1), false)
         taxRateProvider.provideTaxRate(exemptItem).shouldBe(TaxRateProviderImpl.NO_TAX_RATE)
     }
 
@@ -25,7 +25,7 @@ class TaxRateProviderTest : FreeSpec({
             fakeProductId,
             "Miscellaneous item",
             ProductCategory.MISCELLANEOUS,
-            BigDecimal(1),
+            Amount.of(1),
             false
         )
         taxRateProvider.provideTaxRate(nonExemptItem).shouldBe(TaxRateProviderImpl.BASE_SALES_TAX_RATE)
@@ -36,7 +36,7 @@ class TaxRateProviderTest : FreeSpec({
             fakeProductId,
             "Imported item",
             ProductCategory.BOOK,
-            BigDecimal(1),
+            Amount.of(1),
             true
         )
         taxRateProvider.provideTaxRate(importedItem).shouldBe(TaxRateProviderImpl.IMPORT_DUTY_TAX_RATE)
@@ -49,7 +49,7 @@ class TaxRateProviderTest : FreeSpec({
             fakeProductId,
             "Non-exempt imported item",
             ProductCategory.MISCELLANEOUS,
-            BigDecimal(1),
+            Amount.of(1),
             true
         )
         taxRateProvider.provideTaxRate(nonExemptImportedItem).shouldBe(nonExemptImportedTaxRate)

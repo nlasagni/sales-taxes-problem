@@ -10,7 +10,7 @@ import domain.model.exception.TaxRateMustBeGreaterThanZero
 data class TaxRate(val percentage: Int) {
 
     init {
-        if (percentage <= 0) {
+        if (percentage < 0) {
             throw TaxRateMustBeGreaterThanZero()
         }
     }

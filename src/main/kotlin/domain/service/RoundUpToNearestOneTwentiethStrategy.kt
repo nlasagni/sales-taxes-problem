@@ -1,5 +1,6 @@
 package domain.service
 
+import domain.model.Amount
 import java.math.BigDecimal
 import kotlin.math.ceil
 
@@ -11,11 +12,12 @@ import kotlin.math.ceil
 class RoundUpToNearestOneTwentiethStrategy : AmountRoundingStrategy {
 
     companion object {
-        private const val ROUND_UNIT = 0.05
+        private val ROUND_UNIT = Amount(0.05)
+        private const val ROUND_SCALE_TO_INT = 0
+        private const val ROUND_SCALE_TWO_DECIMALS = 2
     }
 
-    override fun round(amount: BigDecimal): BigDecimal {
-        val amountDouble = amount.toDouble()
-        return BigDecimal.valueOf(ceil(amountDouble / ROUND_UNIT) * ROUND_UNIT)
+    override fun round(amount: Amount): Amount {
+        return ((amount / ROUND_UNIT).ceil(ROUND_SCALE_TO_INT) * ROUND_UNIT).floor(ROUND_SCALE_TWO_DECIMALS)
     }
 }
