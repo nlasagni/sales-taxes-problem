@@ -8,4 +8,4 @@ import java.util.*
  *
  * @author Nicola Lasagni on 11/08/2021.
  */
-class PurchasedProduct(val productId: UUID, val quantity: Int, val unitPriceWithTaxes: BigDecimal)
+class PurchasedProduct(val productId: ProductId, val quantity: Int, val unitPriceWithTaxes: BigDecimal)
