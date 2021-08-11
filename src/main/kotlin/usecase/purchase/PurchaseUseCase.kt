@@ -1,10 +1,13 @@
 package usecase.purchase
 
-import domain.model.Item
-import domain.service.TaxCalculator
+import domain.model.Product
+import domain.model.PurchasedProduct
+import domain.model.Receipt
+import domain.service.TaxAmountCalculatorImpl
 import usecase.shared.UseCaseInput
 import usecase.shared.UseCaseOutput
 import usecase.shared.model.UseCaseResponse
+import java.math.BigDecimal
 
 /**
  * Makes a purchase of items specified by the [PurchaseRequest].
@@ -12,22 +15,24 @@ import usecase.shared.model.UseCaseResponse
  * @author Nicola Lasagni on 11/08/2021.
  */
 class PurchaseUseCase(
-    private val taxCalculator: TaxCalculator,
+    private val taxCalculator: TaxAmountCalculatorImpl,
     private val output: UseCaseOutput<PurchaseResponse>
 ) : UseCaseInput<PurchaseRequest> {
 
     override fun execute(request: PurchaseRequest) {
-        val items = request.items
-        var totalSalesTaxes = 0f
-        var totalPrice = 0f
-        val itemsWithTaxes = mutableListOf<Item>()
-        for (item in items) {
-            totalSalesTaxes += taxCalculator.calculateTaxAmount(item)
-            val priceWithTaxes = taxCalculator.calculateTaxedPrice(item)
+        val products = request.products
+        var totalSalesTaxes = BigDecimal.ZERO
+        var totalPrice = BigDecimal.ZERO
+        val purchasedProducts = mutableListOf<PurchasedProduct>()
+        for (product in products) {
+            val taxAmount = taxCalculator.calculateTaxAmount(product)
+            totalSalesTaxes += taxAmount
+            val priceWithTaxes = product.shelfPrice + taxAmount
             totalPrice += priceWithTaxes
-            itemsWithTaxes.add(Item(item.name, item.category, item.quantity, priceWithTaxes, item.imported))
+            purchasedProducts.add(PurchasedProduct(product.id, 0, priceWithTaxes))
         }
-        val response = PurchaseResponse(itemsWithTaxes, totalSalesTaxes, totalPrice)
+        val receipt = Receipt(purchasedProducts, totalSalesTaxes, totalPrice)
+        val response = PurchaseResponse(receipt)
         output.handleResponse(UseCaseResponse(response))
     }
 }
