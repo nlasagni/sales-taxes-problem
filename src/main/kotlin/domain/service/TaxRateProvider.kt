@@ -12,8 +12,9 @@ class TaxRateProvider {
 
     companion object {
         const val NO_TAX_RATE = 0
-        const val BASE_SALES_TAX_RATE = 0
-        const val IMPORT_DUTY_TAX_RATE = 0
+        const val TOTAL_TAX_RATE = 100
+        const val BASE_SALES_TAX_RATE = 10
+        const val IMPORT_DUTY_TAX_RATE = 5
     }
 
     fun provideTaxRate(item: Item): Int {
