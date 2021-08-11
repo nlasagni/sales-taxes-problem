@@ -10,19 +10,21 @@ import domain.model.Item
  */
 class TaxRateProvider {
 
-    private val noTaxRate = 0
-    private val baseSalesTaxRate = 10
-    private val importDuty = 5
+    companion object {
+        const val NO_TAX_RATE = 0
+        const val BASE_SALES_TAX_RATE = 0
+        const val IMPORT_DUTY_TAX_RATE = 0
+    }
 
     fun provideTaxRate(item: Item): Int {
         return getBaseSalesTaxRate(item) + getImportedTaxRate(item)
     }
 
     private fun getBaseSalesTaxRate(item: Item): Int {
-        return if (item.category == Category.MISCELLANEOUS) baseSalesTaxRate else noTaxRate
+        return if (item.category == Category.MISCELLANEOUS) BASE_SALES_TAX_RATE else NO_TAX_RATE
     }
 
     private fun getImportedTaxRate(item: Item): Int {
-        return if (item.imported) importDuty else noTaxRate
+        return if (item.imported) IMPORT_DUTY_TAX_RATE else NO_TAX_RATE
     }
 }

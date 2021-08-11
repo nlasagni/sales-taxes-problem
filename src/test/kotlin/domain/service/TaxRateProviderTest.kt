@@ -3,7 +3,6 @@ package domain.service
 import domain.model.Category
 import domain.model.Item
 import io.kotest.core.spec.style.FreeSpec
-import io.kotest.matchers.ints.shouldBeZero
 import io.kotest.matchers.shouldBe
 
 /**
@@ -17,11 +16,10 @@ class TaxRateProviderTest : FreeSpec({
 
         "provide no tax rate for exempt items" - {
             val exemptItem = Item("Exempt item", Category.BOOK, 1, 1f, false)
-            taxRateProvider.provideTaxRate(exemptItem).shouldBeZero()
+            taxRateProvider.provideTaxRate(exemptItem).shouldBe(TaxRateProvider.NO_TAX_RATE)
         }
 
         "provide base sales tax rate for non-exempt items" - {
-            val nonExemptTaxRate = 10
             val nonExemptItem = Item(
                 "Miscellaneous item",
                 Category.MISCELLANEOUS,
@@ -29,11 +27,10 @@ class TaxRateProviderTest : FreeSpec({
                 1f,
                 false
             )
-            taxRateProvider.provideTaxRate(nonExemptItem).shouldBe(nonExemptTaxRate)
+            taxRateProvider.provideTaxRate(nonExemptItem).shouldBe(TaxRateProvider.BASE_SALES_TAX_RATE)
         }
 
         "provide import duty tax rate for imported items" - {
-            val importedTaxRate = 5
             val importedItem = Item(
                 "Imported item",
                 Category.BOOK,
@@ -41,11 +38,12 @@ class TaxRateProviderTest : FreeSpec({
                 1f,
                 true
             )
-            taxRateProvider.provideTaxRate(importedItem).shouldBe(importedTaxRate)
+            taxRateProvider.provideTaxRate(importedItem).shouldBe(TaxRateProvider.IMPORT_DUTY_TAX_RATE)
         }
 
         "provide base sales plus import duty tax rate for non-exempt imported items" - {
-            val nonExemptImportedTaxRate = 15
+            val nonExemptImportedTaxRate =
+                TaxRateProvider.BASE_SALES_TAX_RATE + TaxRateProvider.IMPORT_DUTY_TAX_RATE
             val nonExemptImportedItem = Item(
                 "Non-exempt imported item",
                 Category.MISCELLANEOUS,
