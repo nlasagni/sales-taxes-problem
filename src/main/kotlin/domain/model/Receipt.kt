@@ -8,7 +8,7 @@ package domain.model
  * @author Nicola Lasagni on 11/08/2021.
  */
 class Receipt(
-    val productInBaskets: Collection<ProductInBasket>,
+    val productInBaskets: Collection<ProductInReceipt>,
     val totalSalesTaxes: Amount,
     val totalPrice: Amount
 )
