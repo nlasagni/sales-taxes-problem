@@ -21,5 +21,4 @@ interface ProductRepository {
      * @return The [Product] found, if present.
      */
     fun findById(productId: ProductId): Product?
-
 }

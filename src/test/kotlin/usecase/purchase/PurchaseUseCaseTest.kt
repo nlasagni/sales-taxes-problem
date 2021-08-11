@@ -9,8 +9,6 @@ import domain.service.TaxRateProviderImpl
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
 import usecase.shared.UseCaseOutput
-import usecase.shared.model.UseCaseError
-import usecase.shared.model.UseCaseResponse
 
 /**
  * Test of the [PurchaseUseCase].
@@ -33,15 +31,10 @@ class PurchaseUseCaseTest : FreeSpec({
         val purchaseUseCase = PurchaseUseCase(
             taxCalculator,
             object : UseCaseOutput<PurchaseResponse> {
-                override fun handleResponse(response: UseCaseResponse<PurchaseResponse>) {
-                    val purchaseResponse = response.response
-                    purchaseResponse.receipt.productInBaskets.size.shouldBe(purchaseItems.size)
-                    purchaseResponse.receipt.totalSalesTaxes.shouldBe(totalSalesTaxes)
-                    purchaseResponse.receipt.totalPrice.shouldBe(totalPrice)
-                }
-
-                override fun handleError(error: UseCaseError) {
-                    // Not used for this test
+                override fun handleResponse(response: PurchaseResponse) {
+                    response.receipt.productInBaskets.size.shouldBe(purchaseItems.size)
+                    response.receipt.totalSalesTaxes.shouldBe(totalSalesTaxes)
+                    response.receipt.totalPrice.shouldBe(totalPrice)
                 }
             }
         )

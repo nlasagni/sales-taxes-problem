@@ -6,7 +6,6 @@ import domain.model.ProductCategory
 import domain.model.ProductId
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
-import java.math.BigDecimal
 
 /**
  * @author Nicola Lasagni on 11/08/2021.

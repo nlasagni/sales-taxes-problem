@@ -6,7 +6,6 @@ import domain.model.Receipt
 import domain.service.TaxAmountCalculatorImpl
 import usecase.shared.UseCaseInput
 import usecase.shared.UseCaseOutput
-import usecase.shared.model.UseCaseResponse
 
 /**
  * Makes a purchase of items specified by the [PurchaseRequest].
@@ -28,10 +27,10 @@ class PurchaseUseCase(
             totalSalesTaxes += taxAmount
             val priceWithTaxes = product.shelfPrice + taxAmount
             totalPrice += priceWithTaxes
-            purchasedProducts.add(ProductInBasket(product.id, 0, priceWithTaxes))
+            purchasedProducts.add(ProductInBasket(product.id, 1, priceWithTaxes, Amount(0.0)))
         }
         val receipt = Receipt(purchasedProducts, totalSalesTaxes, totalPrice)
         val response = PurchaseResponse(receipt)
-        output.handleResponse(UseCaseResponse(response))
+        output.handleResponse(response)
     }
 }
