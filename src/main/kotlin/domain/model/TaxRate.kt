@@ -7,10 +7,10 @@ import domain.model.exception.TaxRateMustBeGreaterThanZero
  *
  * @author Nicola Lasagni on 11/08/2021.
  */
-data class TaxRate(val value: Int) {
+data class TaxRate(val percentage: Int) {
 
     init {
-        if (value <= 0) {
+        if (percentage <= 0) {
             throw TaxRateMustBeGreaterThanZero()
         }
     }
@@ -19,7 +19,7 @@ data class TaxRate(val value: Int) {
      * Operator that sums [other] tax rate to this tax rate.
      */
     operator fun plus(other: TaxRate): TaxRate {
-        return TaxRate(value + other.value)
+        return TaxRate(percentage + other.percentage)
     }
 
 }
