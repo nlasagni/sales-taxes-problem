@@ -20,5 +20,4 @@ data class Product(
             throw NameMustNotBeEmpty()
         }
     }
-
 }

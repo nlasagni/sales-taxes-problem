@@ -1,7 +1,7 @@
 package usecase.purchase
 
-import domain.model.ProductCategory
 import domain.model.Product
+import domain.model.ProductCategory
 import domain.model.ProductId
 import domain.service.TaxAmountCalculatorImpl
 import domain.service.TaxRateProviderImpl

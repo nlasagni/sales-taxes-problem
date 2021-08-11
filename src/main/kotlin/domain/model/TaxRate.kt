@@ -21,5 +21,4 @@ data class TaxRate(val percentage: Int) {
     operator fun plus(other: TaxRate): TaxRate {
         return TaxRate(percentage + other.percentage)
     }
-
 }

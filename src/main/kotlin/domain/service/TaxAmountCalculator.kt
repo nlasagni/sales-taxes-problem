@@ -15,5 +15,4 @@ interface TaxAmountCalculator {
      * @return The taxes amount.
      */
     fun calculateTaxAmount(product: Product): BigDecimal
-
 }

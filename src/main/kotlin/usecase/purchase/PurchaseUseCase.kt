@@ -1,6 +1,5 @@
 package usecase.purchase
 
-import domain.model.Product
 import domain.model.PurchasedProduct
 import domain.model.Receipt
 import domain.service.TaxAmountCalculatorImpl

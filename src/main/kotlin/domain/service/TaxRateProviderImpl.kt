@@ -1,7 +1,7 @@
 package domain.service
 
-import domain.model.ProductCategory
 import domain.model.Product
+import domain.model.ProductCategory
 import domain.model.TaxRate
 
 /**

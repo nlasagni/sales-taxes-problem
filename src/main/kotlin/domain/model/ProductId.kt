@@ -14,5 +14,4 @@ data class ProductId(private val value: String) {
             throw ProductIdMissing()
         }
     }
-
 }

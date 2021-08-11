@@ -2,7 +2,6 @@ package domain.service
 
 import domain.model.Product
 import domain.model.TaxRate
-import java.math.BigDecimal
 
 /**
  * Provides tax rate based on [Product].
@@ -16,5 +15,4 @@ interface TaxRateProvider {
      * @return The product-related tax rate.
      */
     fun provideTaxRate(product: Product): TaxRate
-
 }

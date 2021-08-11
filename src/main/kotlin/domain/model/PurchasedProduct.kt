@@ -1,7 +1,6 @@
 package domain.model
 
 import java.math.BigDecimal
-import java.util.*
 
 /**
  * A [Product] that has been purchased.

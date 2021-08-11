@@ -15,5 +15,4 @@ class TaxAmountCalculatorImpl(private val taxRateProvider: TaxRateProviderImpl) 
             (shelfPriceDouble * providedTaxRate.percentage) / TaxRateProviderImpl.TOTAL_TAX_RATE.percentage
         )
     }
-
 }
