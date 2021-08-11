@@ -1,4 +1,4 @@
-package domain
+package domain.model
 
 /**
  * The category of an [Item].

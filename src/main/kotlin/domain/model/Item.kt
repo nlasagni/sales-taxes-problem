@@ -1,4 +1,4 @@
-package domain
+package domain.model
 
 /**
  * An Item that can be purchased.
