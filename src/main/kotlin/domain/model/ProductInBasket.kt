@@ -10,8 +10,7 @@ import domain.model.exception.QuantityMustBeGreaterThanZero
 class ProductInBasket(
     val productId: ProductId,
     val quantity: Int,
-    val taxesAmount: Amount,
-    val shelfPriceIncludingTaxes: Amount
+    val taxesAmount: Amount
 ) {
     init {
         if (quantity <= 0) {
