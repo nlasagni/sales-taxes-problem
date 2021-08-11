@@ -35,7 +35,7 @@ class PurchaseUseCaseTest : FreeSpec({
             object : UseCaseOutput<PurchaseResponse> {
                 override fun handleResponse(response: UseCaseResponse<PurchaseResponse>) {
                     val purchaseResponse = response.response
-                    purchaseResponse.receipt.purchasedProducts.size.shouldBe(purchaseItems.size)
+                    purchaseResponse.receipt.productInBaskets.size.shouldBe(purchaseItems.size)
                     purchaseResponse.receipt.totalSalesTaxes.shouldBe(totalSalesTaxes)
                     purchaseResponse.receipt.totalPrice.shouldBe(totalPrice)
                 }

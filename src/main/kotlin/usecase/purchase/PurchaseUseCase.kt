@@ -1,7 +1,7 @@
 package usecase.purchase
 
 import domain.model.Amount
-import domain.model.PurchasedProduct
+import domain.model.ProductInBasket
 import domain.model.Receipt
 import domain.service.TaxAmountCalculatorImpl
 import usecase.shared.UseCaseInput
@@ -22,13 +22,13 @@ class PurchaseUseCase(
         val products = request.products
         var totalSalesTaxes = Amount(0.0)
         var totalPrice = Amount(0.0)
-        val purchasedProducts = mutableListOf<PurchasedProduct>()
+        val purchasedProducts = mutableListOf<ProductInBasket>()
         for (product in products) {
             val taxAmount = taxCalculator.calculateTaxAmount(product)
             totalSalesTaxes += taxAmount
             val priceWithTaxes = product.shelfPrice + taxAmount
             totalPrice += priceWithTaxes
-            purchasedProducts.add(PurchasedProduct(product.id, 0, priceWithTaxes))
+            purchasedProducts.add(ProductInBasket(product.id, 0, priceWithTaxes))
         }
         val receipt = Receipt(purchasedProducts, totalSalesTaxes, totalPrice)
         val response = PurchaseResponse(receipt)
