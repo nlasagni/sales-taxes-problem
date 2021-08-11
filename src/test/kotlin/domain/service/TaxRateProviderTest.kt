@@ -1,52 +1,55 @@
 package domain.service
 
-import domain.model.Category
-import domain.model.Item
+import domain.model.ProductCategory
+import domain.model.Product
+import domain.model.ProductId
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
+import java.math.BigDecimal
 
 /**
  * @author Nicola Lasagni on 11/08/2021.
  */
 class TaxRateProviderTest : FreeSpec({
 
-    val taxRateProvider = TaxRateProvider()
+    val fakeProductId = ProductId("1234")
+    val taxRateProvider = TaxRateProviderImpl()
 
     "A TaxRateProvider should provide no tax rate for exempt items" - {
-        val exemptItem = Item("Exempt item", Category.BOOK, 1, 1f, false)
-        taxRateProvider.provideTaxRate(exemptItem).shouldBe(TaxRateProvider.NO_TAX_RATE)
+        val exemptItem = Product(fakeProductId, "Exempt item", ProductCategory.BOOK, BigDecimal(1), false)
+        taxRateProvider.provideTaxRate(exemptItem).shouldBe(TaxRateProviderImpl.NO_TAX_RATE)
     }
 
     "A TaxRateProvider should provide base sales tax rate for non-exempt items" - {
-        val nonExemptItem = Item(
+        val nonExemptItem = Product(
+            fakeProductId,
             "Miscellaneous item",
-            Category.MISCELLANEOUS,
-            1,
-            1f,
+            ProductCategory.MISCELLANEOUS,
+            BigDecimal(1),
             false
         )
-        taxRateProvider.provideTaxRate(nonExemptItem).shouldBe(TaxRateProvider.BASE_SALES_TAX_RATE)
+        taxRateProvider.provideTaxRate(nonExemptItem).shouldBe(TaxRateProviderImpl.BASE_SALES_TAX_RATE)
     }
 
     "A TaxRateProvider should provide import duty tax rate for imported items" - {
-        val importedItem = Item(
+        val importedItem = Product(
+            fakeProductId,
             "Imported item",
-            Category.BOOK,
-            1,
-            1f,
+            ProductCategory.BOOK,
+            BigDecimal(1),
             true
         )
-        taxRateProvider.provideTaxRate(importedItem).shouldBe(TaxRateProvider.IMPORT_DUTY_TAX_RATE)
+        taxRateProvider.provideTaxRate(importedItem).shouldBe(TaxRateProviderImpl.IMPORT_DUTY_TAX_RATE)
     }
 
     "A TaxRateProvider should provide base sales plus import duty tax rate for non-exempt imported items" - {
         val nonExemptImportedTaxRate =
-            TaxRateProvider.BASE_SALES_TAX_RATE + TaxRateProvider.IMPORT_DUTY_TAX_RATE
-        val nonExemptImportedItem = Item(
+            TaxRateProviderImpl.BASE_SALES_TAX_RATE + TaxRateProviderImpl.IMPORT_DUTY_TAX_RATE
+        val nonExemptImportedItem = Product(
+            fakeProductId,
             "Non-exempt imported item",
-            Category.MISCELLANEOUS,
-            1,
-            1f,
+            ProductCategory.MISCELLANEOUS,
+            BigDecimal(1),
             true
         )
         taxRateProvider.provideTaxRate(nonExemptImportedItem).shouldBe(nonExemptImportedTaxRate)

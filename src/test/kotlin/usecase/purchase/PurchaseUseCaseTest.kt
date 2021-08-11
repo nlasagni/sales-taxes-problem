@@ -1,14 +1,16 @@
 package usecase.purchase
 
-import domain.model.Category
-import domain.model.Item
-import domain.service.TaxCalculator
-import domain.service.TaxRateProvider
+import domain.model.ProductCategory
+import domain.model.Product
+import domain.model.ProductId
+import domain.service.TaxAmountCalculatorImpl
+import domain.service.TaxRateProviderImpl
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
 import usecase.shared.UseCaseOutput
 import usecase.shared.model.UseCaseError
 import usecase.shared.model.UseCaseResponse
+import java.math.BigDecimal
 
 /**
  * Test of the [PurchaseUseCase].
@@ -17,14 +19,15 @@ import usecase.shared.model.UseCaseResponse
  */
 class PurchaseUseCaseTest : FreeSpec({
 
-    val taxRateProvider = TaxRateProvider()
-    val taxCalculator = TaxCalculator(taxRateProvider)
-    val books = Item("book", Category.BOOK, 2, 1f, false)
-    val musicCD = Item("music CD", Category.MISCELLANEOUS, 1, 1f, false)
-    val chocolateBar = Item("chocolate bar", Category.FOOD, 1, 1f, false)
+    val taxRateProvider = TaxRateProviderImpl()
+    val taxCalculator = TaxAmountCalculatorImpl(taxRateProvider)
+    val fakeProductId = ProductId("1234")
+    val books = Product(fakeProductId, "book", ProductCategory.BOOK, BigDecimal(2), false)
+    val musicCD = Product(fakeProductId, "music CD", ProductCategory.MISCELLANEOUS, BigDecimal(1), false)
+    val chocolateBar = Product(fakeProductId, "chocolate bar", ProductCategory.FOOD, BigDecimal(1), false)
     val purchaseItems = listOf(books, musicCD, chocolateBar)
-    val totalSalesTaxes = 0.1f
-    val totalPrice = 4.1f
+    val totalSalesTaxes = BigDecimal(0.1)
+    val totalPrice = BigDecimal(4.1)
 
     "The purchase use case should generate a response which contains correct items, taxes and total price" - {
         val purchaseUseCase = PurchaseUseCase(
@@ -32,9 +35,9 @@ class PurchaseUseCaseTest : FreeSpec({
             object : UseCaseOutput<PurchaseResponse> {
                 override fun handleResponse(response: UseCaseResponse<PurchaseResponse>) {
                     val purchaseResponse = response.response
-                    purchaseResponse.items.size.shouldBe(purchaseItems.size)
-                    purchaseResponse.salesTaxesAmount.shouldBe(totalSalesTaxes)
-                    purchaseResponse.totalPrice.shouldBe(totalPrice)
+                    purchaseResponse.receipt.purchasedProducts.size.shouldBe(purchaseItems.size)
+                    purchaseResponse.receipt.totalSalesTaxes.shouldBe(totalSalesTaxes)
+                    purchaseResponse.receipt.totalPrice.shouldBe(totalPrice)
                 }
 
                 override fun handleError(error: UseCaseError) {

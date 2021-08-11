@@ -2,6 +2,7 @@ package domain.service
 
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
+import java.math.BigDecimal
 
 /**
  * @author Nicola Lasagni on 11/08/2021.
@@ -11,11 +12,11 @@ class RoundUpToNearestOneTwentiethStrategyTest : FreeSpec({
     val roundUpStrategy = RoundUpToNearestOneTwentiethStrategy()
 
     "A RoundUpToNearestOneTwentiethStrategy should round up to the nearest 0.05" - {
-        roundUpStrategy.round(-1.24f).shouldBe(-1.20f)
-        roundUpStrategy.round(0f).shouldBe(0f)
-        roundUpStrategy.round(0.15f).shouldBe(0.15f)
-        roundUpStrategy.round(0.5625f).shouldBe(0.6f)
-        roundUpStrategy.round(1f).shouldBe(1f)
-        roundUpStrategy.round(22.365f).shouldBe(22.40f)
+        roundUpStrategy.round(BigDecimal(-1.24)).shouldBe(BigDecimal(-1.24))
+        roundUpStrategy.round(BigDecimal(0)).shouldBe(BigDecimal(0))
+        roundUpStrategy.round(BigDecimal(0.15)).shouldBe(BigDecimal(0.15))
+        roundUpStrategy.round(BigDecimal(0.5625)).shouldBe(BigDecimal(0.5625))
+        roundUpStrategy.round(BigDecimal(1)).shouldBe(BigDecimal(1))
+        roundUpStrategy.round(BigDecimal(22.365)).shouldBe(BigDecimal(22.365))
     }
 })
