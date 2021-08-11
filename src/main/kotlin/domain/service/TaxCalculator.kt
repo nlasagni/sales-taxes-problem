@@ -3,6 +3,8 @@ package domain.service
 import domain.model.Item
 
 /**
+ * Calculates tax amount and taxed prices of [Item]s.
+ *
  * @author Nicola Lasagni on 11/08/2021.
  */
 class TaxCalculator(private val taxRateProvider: TaxRateProvider) {

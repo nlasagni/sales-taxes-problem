@@ -7,5 +7,9 @@ package domain.service
  */
 interface TaxRoundingStrategy {
 
+    /**
+     * Round the given [value] by following the implemented strategy.
+     * @return The rounded value.
+     */
     fun round(value: Float): Float
 }
