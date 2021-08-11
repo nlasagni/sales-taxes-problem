@@ -3,13 +3,13 @@ package domain.model
 import domain.model.exception.PriceMustBeGreaterThanZero
 
 /**
- * The price of an [Item].
+ * The price of an [Product].
  *
  * @author Nicola Lasagni on 11/08/2021.
  */
-data class Price(val amount: Double) {
+data class Amount(val value: Double) {
     init {
-        if (amount <= 0) {
+        if (value <= 0) {
             throw PriceMustBeGreaterThanZero()
         }
     }
