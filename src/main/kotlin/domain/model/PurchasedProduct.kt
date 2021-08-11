@@ -1,5 +1,6 @@
 package domain.model
 
+import java.math.BigDecimal
 import java.util.*
 
 /**
@@ -7,4 +8,4 @@ import java.util.*
  *
  * @author Nicola Lasagni on 11/08/2021.
  */
-class PurchasedProduct(val productId: UUID, val quantity: Int, val unitPriceWithTaxes: Amount)
+class PurchasedProduct(val productId: UUID, val quantity: Int, val unitPriceWithTaxes: BigDecimal)

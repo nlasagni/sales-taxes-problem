@@ -1,6 +1,7 @@
 package domain.model
 
 import domain.model.exception.NameMustNotBeEmpty
+import java.math.BigDecimal
 
 /**
  * An Item that can be purchased.
@@ -11,7 +12,7 @@ data class Product(
     val id: ProductId,
     val name: String,
     val category: ProductCategory,
-    val shelfPrice: Amount,
+    val shelfPrice: BigDecimal,
     val imported: Boolean
 ) {
     init {
