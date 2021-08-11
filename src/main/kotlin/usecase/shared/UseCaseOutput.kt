@@ -1,7 +1,7 @@
-package usecase
+package usecase.shared
 
-import usecase.model.UseCaseError
-import usecase.model.UseCaseResponse
+import usecase.shared.model.UseCaseError
+import usecase.shared.model.UseCaseResponse
 
 /**
  * The output port of the Use Case layer.

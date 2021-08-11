@@ -1,4 +1,4 @@
-package usecase
+package usecase.shared
 
 /**
  * The input port of the Use Case layer.

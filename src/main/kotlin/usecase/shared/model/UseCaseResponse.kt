@@ -1,4 +1,4 @@
-package usecase.model
+package usecase.shared.model
 
 /**
  * Class that represents the response generated from the
