@@ -1,6 +1,8 @@
 package domain.model
 
 /**
+ * A [Product] inside a receipt.
+ *
  * @author Nicola Lasagni on 12/08/2021.
  */
 class ProductInReceipt(

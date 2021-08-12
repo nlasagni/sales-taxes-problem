@@ -3,7 +3,7 @@ package domain.model
 import domain.model.exception.NameMustNotBeEmpty
 
 /**
- * An Item that can be purchased.
+ * A Product that can be purchased.
  *
  * @author Nicola Lasagni on 11/08/2021.
  */
