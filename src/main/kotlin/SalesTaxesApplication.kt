@@ -5,7 +5,6 @@ import configuration.SalesTaxesConfiguration
 import usecase.addtobasket.AddToBasketRequest
 import usecase.purchase.PurchaseRequest
 import usecase.shared.UseCaseInput
-import java.lang.StringBuilder
 
 /**
  * The application starting class, responsible of executing the use cases in order to simulate the input
