@@ -40,7 +40,8 @@ class PurchaseUseCase(
                     product.name,
                     productInBasket.quantity,
                     taxesAmount,
-                    totalShelfPriceIncludingTaxes
+                    totalShelfPriceIncludingTaxes,
+                    product.imported
                 )
             )
         }

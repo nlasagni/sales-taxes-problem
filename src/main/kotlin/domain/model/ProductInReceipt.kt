@@ -9,7 +9,8 @@ class ProductInReceipt(
     val name: String,
     val quantity: Int,
     val taxesAmount: Amount,
-    val shelfPriceIncludingTaxes: Amount
+    val shelfPriceIncludingTaxes: Amount,
+    val imported: Boolean
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -19,6 +20,7 @@ class ProductInReceipt(
         if (quantity != other.quantity) return false
         if (taxesAmount != other.taxesAmount) return false
         if (shelfPriceIncludingTaxes != other.shelfPriceIncludingTaxes) return false
+        if (imported != other.imported) return false
 
         return true
     }
@@ -28,6 +30,7 @@ class ProductInReceipt(
         result = 31 * result + quantity
         result = 31 * result + taxesAmount.hashCode()
         result = 31 * result + shelfPriceIncludingTaxes.hashCode()
+        result = 31 * result + imported.hashCode()
         return result
     }
 
@@ -36,6 +39,7 @@ class ProductInReceipt(
             "name='$name', " +
             "quantity=$quantity, " +
             "taxesAmount=$taxesAmount, " +
-            "shelfPriceIncludingTaxes=$shelfPriceIncludingTaxes)"
+            "shelfPriceIncludingTaxes=$shelfPriceIncludingTaxes, " +
+            "imported=$imported)"
     }
 }
