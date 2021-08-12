@@ -44,7 +44,7 @@ class SalesTaxesApplication : PresenterOutput {
     }
 
     private fun processThirdInput() {
-        addToBasketUseCase.execute(AddToBasketRequest(MockedData.ThirdInput.IMPORTED_BOTTLE_OF_PERFUME_ID, 2))
+        addToBasketUseCase.execute(AddToBasketRequest(MockedData.ThirdInput.IMPORTED_BOTTLE_OF_PERFUME_ID, 1))
         addToBasketUseCase.execute(AddToBasketRequest(MockedData.ThirdInput.BOTTLE_OF_PERFUME_ID, 1))
         addToBasketUseCase.execute(AddToBasketRequest(MockedData.ThirdInput.HEADACHE_PILLS_ID, 1))
         addToBasketUseCase.execute(
