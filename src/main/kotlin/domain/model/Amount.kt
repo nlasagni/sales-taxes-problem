@@ -35,11 +35,18 @@ data class Amount(private val value: Double) {
     }
 
     /**
-     * Returns the largest integer less than or equal to a given number, depending on the [scale] specified.
+     * Rounds down towards zero.
      * @return The new floored Amount.
      */
-    fun floor(scale: Int): Amount {
-        return Amount(bigDecimalValue.setScale(scale, RoundingMode.FLOOR).toDouble())
+    fun roundDown(scale: Int): Amount {
+        return Amount(bigDecimalValue.setScale(scale, RoundingMode.DOWN).toDouble())
+    }
+
+    /**
+     * Formats the amount by including only two decimals.
+     */
+    fun formatToTwoDecimals(): String {
+        return String.format("%.2f", value)
     }
 
     /**

@@ -1,7 +1,6 @@
 package domain.service
 
 import domain.model.Amount
-import kotlin.math.ceil
 
 /**
  * Rounds a value up to the nearest 0.05.
@@ -17,6 +16,6 @@ class RoundUpToNearestOneTwentiethStrategy : AmountRoundingStrategy {
     }
 
     override fun round(amount: Amount): Amount {
-        return ((amount / ROUND_UNIT).ceil(ROUND_SCALE_TO_INT) * ROUND_UNIT).floor(ROUND_SCALE_TWO_DECIMALS)
+        return ((amount / ROUND_UNIT).ceil(ROUND_SCALE_TO_INT) * ROUND_UNIT).roundDown(ROUND_SCALE_TWO_DECIMALS)
     }
 }

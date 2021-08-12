@@ -13,15 +13,15 @@ class ReceiptPresenter(private val output: PresenterOutput) : UseCaseOutput<Purc
     override fun handleResponse(response: PurchaseResponse) {
         val receipt = response.receipt
         val stringBuilder = StringBuilder()
-        stringBuilder.appendLine("Receipt")
+        stringBuilder.appendLine("Purchase Receipt")
         for (product in receipt.productInBaskets) {
             val productName = if (product.imported) "imported " + product.name else product.name
             stringBuilder.appendLine(
-                "${product.quantity} $productName: ${product.shelfPriceIncludingTaxes}"
+                "${product.quantity} $productName: ${product.shelfPriceIncludingTaxes.formatToTwoDecimals()}"
             )
         }
-        stringBuilder.appendLine("Sales Taxes: ${receipt.totalSalesTaxes}")
-        stringBuilder.appendLine("Total: ${receipt.totalPrice}")
+        stringBuilder.appendLine("Sales Taxes: ${receipt.totalSalesTaxes.formatToTwoDecimals()}")
+        stringBuilder.appendLine("Total: ${receipt.totalPrice.formatToTwoDecimals()}")
         output.renderViewModel(StringViewModel(stringBuilder.toString()))
     }
 }

@@ -11,9 +11,14 @@ import usecase.shared.UseCaseOutput
 class BasketPresenter(private val output: PresenterOutput) : UseCaseOutput<AddToBasketResponse> {
 
     override fun handleResponse(response: AddToBasketResponse) {
+        val product = response.productInBasket
         val stringBuilder = StringBuilder()
         stringBuilder.appendLine("Product added to basket:")
-        stringBuilder.appendLine(response.productInBasket.toString())
+        stringBuilder.appendLine("Id: ${product.productId}")
+        stringBuilder.appendLine("Quantity: ${product.quantity}")
+        stringBuilder.appendLine(
+            "Taxes Amount: ${product.productId}, Id: ${product.taxesAmount.formatToTwoDecimals()}"
+        )
         output.renderViewModel(StringViewModel(stringBuilder.toString()))
     }
 }
