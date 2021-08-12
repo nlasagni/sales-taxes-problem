@@ -17,4 +17,21 @@ class ProductInBasket(
             throw QuantityMustBeGreaterThanZero()
         }
     }
+
+    override fun toString(): String {
+        return "ProductInBasket(productId=$productId, quantity=$quantity, taxesAmount=$taxesAmount)"
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is ProductInBasket) return false
+
+        if (productId != other.productId) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return productId.hashCode()
+    }
 }
