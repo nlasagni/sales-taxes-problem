@@ -11,7 +11,7 @@ interface AmountRoundingStrategy {
 
     /**
      * Round the given [amount] by following the implemented strategy.
-     * @return The rounded value.
+     * @return The rounded amount.
      */
     fun round(amount: Amount): Amount
 }

@@ -10,7 +10,7 @@ import usecase.shared.UseCaseInput
 import usecase.shared.UseCaseOutput
 
 /**
- * Makes a purchase of items specified by the [PurchaseRequest].
+ * Makes a purchase of the products previously added to the basket.
  *
  * @author Nicola Lasagni on 11/08/2021.
  */
@@ -23,7 +23,7 @@ class PurchaseUseCase(
     override fun execute(request: PurchaseRequest) {
         val productsInBasket = productInBasketRepository.findAll()
         if (productsInBasket.isEmpty()) {
-            throw NoProductInBasket()
+            throw BasketIsEmpty()
         }
         var totalSalesTaxes = Amount(0.0)
         var totalPrice = Amount(0.0)

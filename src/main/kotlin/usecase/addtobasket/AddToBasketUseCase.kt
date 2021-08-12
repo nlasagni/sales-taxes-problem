@@ -9,6 +9,8 @@ import usecase.shared.UseCaseInput
 import usecase.shared.UseCaseOutput
 
 /**
+ * Adds a product to the basket.
+ *
  * @author Nicola Lasagni on 11/08/2021.
  */
 class AddToBasketUseCase(
