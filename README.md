@@ -36,6 +36,7 @@ $ cd sales-taxes-problem
 #### Build from source code
 
 Build the project (includes compiling and testing).
+
 ```bash
 $ gradlew build
 ```
@@ -50,7 +51,7 @@ $ gradlew run
 
 #### Test
 
-Launch all the test of this project.
+Launch all the tests of this project.
 
 ```bash
 $ gradlew test
