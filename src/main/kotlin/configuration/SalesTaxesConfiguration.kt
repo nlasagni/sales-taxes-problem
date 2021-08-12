@@ -5,6 +5,7 @@ import adapter.presenter.PresenterOutput
 import adapter.presenter.ReceiptPresenter
 import adapter.repository.InMemoryProductInBasketRepository
 import adapter.repository.InMemoryProductRepository
+import domain.service.RoundUpToNearestOneTwentiethStrategy
 import domain.service.TaxAmountCalculatorImpl
 import domain.service.TaxRateProviderImpl
 import usecase.addtobasket.AddToBasketRequest
@@ -21,7 +22,8 @@ import usecase.shared.UseCaseInput
 class SalesTaxesConfiguration {
 
     private val taxProvider = TaxRateProviderImpl()
-    private val taxCalculator = TaxAmountCalculatorImpl(taxProvider)
+    val amountRoundingStrategy = RoundUpToNearestOneTwentiethStrategy()
+    private val taxCalculator = TaxAmountCalculatorImpl(taxProvider, amountRoundingStrategy)
     private val productRepository = InMemoryProductRepository()
     private val productInBasketRepository = InMemoryProductInBasketRepository()
 

@@ -20,7 +20,8 @@ class TaxCalculatorTest : FreeSpec({
         true
     )
     val taxRateProvider = TaxRateProviderImpl()
-    val taxCalculator = TaxAmountCalculatorImpl(taxRateProvider)
+    val amountRoundingStrategy = RoundUpToNearestOneTwentiethStrategy()
+    val taxCalculator = TaxAmountCalculatorImpl(taxRateProvider, amountRoundingStrategy)
     val expectedTaxAmount = Amount(0.15)
 
     "A TaxCalculator should compute the tax amount for a given item" - {

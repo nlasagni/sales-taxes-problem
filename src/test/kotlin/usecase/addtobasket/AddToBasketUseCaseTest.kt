@@ -6,6 +6,7 @@ import domain.model.Amount
 import domain.model.Product
 import domain.model.ProductCategory
 import domain.model.ProductId
+import domain.service.RoundUpToNearestOneTwentiethStrategy
 import domain.service.TaxAmountCalculatorImpl
 import domain.service.TaxRateProviderImpl
 import io.kotest.core.spec.style.FreeSpec
@@ -19,7 +20,8 @@ import usecase.shared.ProductNotFound
 class AddToBasketUseCaseTest : FreeSpec({
 
     val taxProvider = TaxRateProviderImpl()
-    val taxCalculator = TaxAmountCalculatorImpl(taxProvider)
+    val amountRoundingStrategy = RoundUpToNearestOneTwentiethStrategy()
+    val taxCalculator = TaxAmountCalculatorImpl(taxProvider, amountRoundingStrategy)
     val productRepository = InMemoryProductRepository()
     val productInBasketRepository = InMemoryProductInBasketRepository()
     val addToBasketUseCase = AddToBasketUseCase(

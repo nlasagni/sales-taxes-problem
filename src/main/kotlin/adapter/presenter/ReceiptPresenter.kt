@@ -17,7 +17,7 @@ class ReceiptPresenter(private val output: PresenterOutput) : UseCaseOutput<Purc
         for (product in receipt.productInBaskets) {
             val productName = if (product.imported) "imported " + product.name else product.name
             stringBuilder.appendLine(
-                "${product.quantity} ${productName}: ${product.shelfPriceIncludingTaxes}"
+                "${product.quantity} $productName: ${product.shelfPriceIncludingTaxes}"
             )
         }
         stringBuilder.appendLine("Sales Taxes: ${receipt.totalSalesTaxes}")
