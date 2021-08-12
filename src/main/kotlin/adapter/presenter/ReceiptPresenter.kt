@@ -4,6 +4,8 @@ import usecase.purchase.PurchaseResponse
 import usecase.shared.UseCaseOutput
 
 /**
+ * A presenter which processes output data coming from purchase-related use cases.
+ *
  * @author Nicola Lasagni on 12/08/2021.
  */
 class ReceiptPresenter(private val output: PresenterOutput) : UseCaseOutput<PurchaseResponse> {

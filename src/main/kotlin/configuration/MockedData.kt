@@ -6,6 +6,8 @@ import domain.model.ProductCategory
 import domain.model.ProductId
 
 /**
+ * Object that contains the data coming from the example inputs.
+ *
  * @author Nicola Lasagni on 12/08/2021.
  */
 object MockedData {
@@ -15,9 +17,9 @@ object MockedData {
         val MUSIC_CD_ID = ProductId("2")
         val CHOCOLATE_BAR_ID = ProductId("3")
 
-        const val BOOK_PRICE = 12.49
-        const val MUSIC_CD_PRICE = 14.99
-        const val CHOCOLATE_BAR_PRICE = 0.85
+        private const val BOOK_PRICE = 12.49
+        private const val MUSIC_CD_PRICE = 14.99
+        private const val CHOCOLATE_BAR_PRICE = 0.85
 
         val BOOK = Product(
             id = BOOK_ID,
@@ -46,8 +48,8 @@ object MockedData {
         val BOX_OF_CHOCOLATES_ID = ProductId("4")
         val BOTTLE_OF_PERFUME_ID = ProductId("5")
 
-        const val BOX_OF_CHOCOLATES_PRICE = 10.0
-        const val BOTTLE_OF_PERFUME_PRICE = 47.50
+        private const val BOX_OF_CHOCOLATES_PRICE = 10.0
+        private const val BOTTLE_OF_PERFUME_PRICE = 47.50
 
         val BOX_OF_CHOCOLATES = Product(
             id = BOX_OF_CHOCOLATES_ID,
@@ -65,16 +67,18 @@ object MockedData {
         )
     }
 
-    object ThirtInput {
+    object ThirdInput {
         val IMPORTED_BOTTLE_OF_PERFUME_ID = ProductId("6")
         val BOTTLE_OF_PERFUME_ID = ProductId("7")
         val HEADACHE_PILLS_ID = ProductId("8")
         val BOX_OF_CHOCOLATES_ID = ProductId("9")
-        const val IMPORTED_BOTTLE_OF_PERFUME_PRICE = 27.99
-        const val BOTTLE_OF_PERFUME_PRICE = 18.99
-        const val HEADACHE_PILLS_PRICE = 9.75
-        const val BOX_OF_CHOCOLATES_PRICE = 11.25
+
         const val BOX_OF_CHOCOLATES_QUANTITY = 3
+
+        private const val IMPORTED_BOTTLE_OF_PERFUME_PRICE = 27.99
+        private const val BOTTLE_OF_PERFUME_PRICE = 18.99
+        private const val HEADACHE_PILLS_PRICE = 9.75
+        private const val BOX_OF_CHOCOLATES_PRICE = 11.25
 
         val IMPORTED_BOTTLE_OF_PERFUME = Product(
             id = IMPORTED_BOTTLE_OF_PERFUME_ID,

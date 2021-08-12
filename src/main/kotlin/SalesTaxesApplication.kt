@@ -7,15 +7,18 @@ import usecase.purchase.PurchaseRequest
 import usecase.shared.UseCaseInput
 
 /**
+ * The application starting class, responsible of executing the use cases in order to simulate the input
+ * provided by the problem examples.
+ *
  * @author Nicola Lasagni on 12/08/2021.
  */
 class SalesTaxesApplication : PresenterOutput {
 
-    val configuration = SalesTaxesConfiguration()
-    val addToBasketUseCase: UseCaseInput<AddToBasketRequest> by lazy {
+    private val configuration = SalesTaxesConfiguration()
+    private val addToBasketUseCase: UseCaseInput<AddToBasketRequest> by lazy {
         configuration.retrieveAddToBasketUseCase()
     }
-    val purchaseUseCase: UseCaseInput<PurchaseRequest> by lazy {
+    private val purchaseUseCase: UseCaseInput<PurchaseRequest> by lazy {
         configuration.retrievePurchaseUseCase()
     }
 
@@ -41,13 +44,13 @@ class SalesTaxesApplication : PresenterOutput {
     }
 
     private fun processThirdInput() {
-        addToBasketUseCase.execute(AddToBasketRequest(MockedData.ThirtInput.IMPORTED_BOTTLE_OF_PERFUME_ID, 2))
-        addToBasketUseCase.execute(AddToBasketRequest(MockedData.ThirtInput.BOTTLE_OF_PERFUME_ID, 1))
-        addToBasketUseCase.execute(AddToBasketRequest(MockedData.ThirtInput.HEADACHE_PILLS_ID, 1))
+        addToBasketUseCase.execute(AddToBasketRequest(MockedData.ThirdInput.IMPORTED_BOTTLE_OF_PERFUME_ID, 2))
+        addToBasketUseCase.execute(AddToBasketRequest(MockedData.ThirdInput.BOTTLE_OF_PERFUME_ID, 1))
+        addToBasketUseCase.execute(AddToBasketRequest(MockedData.ThirdInput.HEADACHE_PILLS_ID, 1))
         addToBasketUseCase.execute(
             AddToBasketRequest(
-                MockedData.ThirtInput.BOX_OF_CHOCOLATES_ID,
-                MockedData.ThirtInput.BOX_OF_CHOCOLATES_QUANTITY
+                MockedData.ThirdInput.BOX_OF_CHOCOLATES_ID,
+                MockedData.ThirdInput.BOX_OF_CHOCOLATES_QUANTITY
             )
         )
         purchaseUseCase.execute(PurchaseRequest())

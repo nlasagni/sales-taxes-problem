@@ -14,6 +14,8 @@ import usecase.purchase.PurchaseUseCase
 import usecase.shared.UseCaseInput
 
 /**
+ * Simple configuration class that prepares the application components and inserts some mock data.
+ *
  * @author Nicola Lasagni on 12/08/2021.
  */
 class SalesTaxesConfiguration {
@@ -56,9 +58,9 @@ class SalesTaxesConfiguration {
         productRepository.add(MockedData.FirstInput.CHOC_BAR)
         productRepository.add(MockedData.SecondInput.BOX_OF_CHOCOLATES)
         productRepository.add(MockedData.SecondInput.BOTTLE_OF_PERFUME)
-        productRepository.add(MockedData.ThirtInput.IMPORTED_BOTTLE_OF_PERFUME)
-        productRepository.add(MockedData.ThirtInput.BOTTLE_OF_PERFUME)
-        productRepository.add(MockedData.ThirtInput.HEADACHE_PILLS)
-        productRepository.add(MockedData.ThirtInput.BOX_OF_CHOCOLATES)
+        productRepository.add(MockedData.ThirdInput.IMPORTED_BOTTLE_OF_PERFUME)
+        productRepository.add(MockedData.ThirdInput.BOTTLE_OF_PERFUME)
+        productRepository.add(MockedData.ThirdInput.HEADACHE_PILLS)
+        productRepository.add(MockedData.ThirdInput.BOX_OF_CHOCOLATES)
     }
 }
