@@ -20,4 +20,8 @@ class InMemoryProductInBasketRepository : ProductInBasketRepository {
     override fun findAll(): Collection<ProductInBasket> {
         return inMemoryStorage
     }
+
+    override fun deleteAll() {
+        inMemoryStorage.clear()
+    }
 }

@@ -45,6 +45,7 @@ class PurchaseUseCase(
                 )
             )
         }
+        productInBasketRepository.deleteAll()
         val receipt = Receipt(productsInReceipt, totalSalesTaxes, totalPrice)
         val response = PurchaseResponse(receipt)
         output.handleResponse(response)

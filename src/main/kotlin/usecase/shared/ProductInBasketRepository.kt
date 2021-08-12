@@ -20,4 +20,9 @@ interface ProductInBasketRepository {
      * @return The collection of [ProductInBasket]s found.
      */
     fun findAll(): Collection<ProductInBasket>
+
+    /**
+     * Deletes all the [ProductInBasket] of this repository.
+     */
+    fun deleteAll()
 }
