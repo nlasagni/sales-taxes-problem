@@ -5,6 +5,7 @@ import configuration.SalesTaxesConfiguration
 import usecase.addtobasket.AddToBasketRequest
 import usecase.purchase.PurchaseRequest
 import usecase.shared.UseCaseInput
+import java.lang.StringBuilder
 
 /**
  * The application starting class, responsible of executing the use cases in order to simulate the input
@@ -23,14 +24,20 @@ class SalesTaxesApplication : PresenterOutput {
     }
 
     fun start() {
+        renderMessage("Welcome to the Sales Taxes Application Example Project")
+        renderMessage("Configuring components...")
         configuration.configureComponents(this)
+        renderMessage("Creating initial data...")
         configuration.feedInitialData()
+        renderMessage("Start example processing")
         processFirstInput()
         processSecondInput()
         processThirdInput()
+        renderMessage("Bye.")
     }
 
     private fun processFirstInput() {
+        renderMessage("===> Input 1")
         addToBasketUseCase.execute(AddToBasketRequest(MockedData.FirstInput.BOOK_ID, 2))
         addToBasketUseCase.execute(AddToBasketRequest(MockedData.FirstInput.MUSIC_CD_ID, 1))
         addToBasketUseCase.execute(AddToBasketRequest(MockedData.FirstInput.CHOCOLATE_BAR_ID, 1))
@@ -38,12 +45,14 @@ class SalesTaxesApplication : PresenterOutput {
     }
 
     private fun processSecondInput() {
+        renderMessage("===> Input 2")
         addToBasketUseCase.execute(AddToBasketRequest(MockedData.SecondInput.BOX_OF_CHOCOLATES_ID, 1))
         addToBasketUseCase.execute(AddToBasketRequest(MockedData.SecondInput.BOTTLE_OF_PERFUME_ID, 1))
         purchaseUseCase.execute(PurchaseRequest())
     }
 
     private fun processThirdInput() {
+        renderMessage("===> Input 3")
         addToBasketUseCase.execute(AddToBasketRequest(MockedData.ThirdInput.IMPORTED_BOTTLE_OF_PERFUME_ID, 1))
         addToBasketUseCase.execute(AddToBasketRequest(MockedData.ThirdInput.BOTTLE_OF_PERFUME_ID, 1))
         addToBasketUseCase.execute(AddToBasketRequest(MockedData.ThirdInput.HEADACHE_PILLS_ID, 1))
@@ -57,7 +66,11 @@ class SalesTaxesApplication : PresenterOutput {
     }
 
     override fun renderViewModel(viewModel: StringViewModel) {
-        println(viewModel.content)
+        renderMessage(viewModel.content)
+    }
+
+    private fun renderMessage(message: String) {
+        println(message)
     }
 }
 
